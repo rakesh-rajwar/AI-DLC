@@ -18,7 +18,7 @@ into any one module yet — I want the map first.
 ## Step 2 — Architecture spec
 
 ```
-Based on the structural inventory, write /specs/baseline/architecture.md:
+Based on the structural inventory, write /.ai-dlc/architecture.md:
 - overall architecture style (layered, MVC, microservices, etc.)
 - data flow through the system for the 2-3 most important use cases
 - tech stack and why each major dependency appears to be there
@@ -33,7 +33,7 @@ Apply Rule 0 if anything here is ambiguous.
 ## Step 3 — Domain model spec
 
 ```
-Write /specs/baseline/domain-model.md: core entities, their attributes,
+Write /.ai-dlc/domain-model.md: core entities, their attributes,
 and relationships, as actually implemented (check the data layer, not
 just naming conventions in code — those can be misleading in legacy
 code). Note any entities that appear to serve overlapping or unclear
@@ -46,7 +46,7 @@ purposes.
 Search the codebase for business logic that isn't obvious from naming:
 validation rules, edge-case handling, special-cased conditionals, and
 calculations. For each one, write it as a plain-language rule in
-/specs/baseline/business-rules.md, with a file/line reference. Flag any
+/.ai-dlc/business-rules.md, with a file/line reference. Flag any
 rule that looks like it might be a bug rather than intentional behavior
 — don't decide which, just flag it.
 ```
@@ -54,7 +54,7 @@ rule that looks like it might be a bug rather than intentional behavior
 ## Step 5 — Constitution spec (conventions)
 
 ```
-Write /specs/baseline/constitution.md: naming conventions, file/folder
+Write /.ai-dlc/constitution.md: naming conventions, file/folder
 structure patterns, error-handling style, testing patterns (if any), and
 any conventions that are inconsistently followed. Note where the
 codebase clearly disagrees with itself.
@@ -63,7 +63,7 @@ codebase clearly disagrees with itself.
 ## Step 6 — Confidence check (verify before trusting)
 
 ```
-For each doc in /specs/baseline/, list the 3-5 claims you're least
+For each doc in /.ai-dlc/, list the 3-5 claims you're least
 confident about, and why. Apply Rule 0 for any of these where my input
 would resolve the uncertainty — don't just flag and move on.
 ```
@@ -73,8 +73,8 @@ Correct anything surfaced here before treating the baseline as ground truth.
 ## Step 7 — User stories (reverse-engineered from behavior)
 
 ```
-Using /specs/baseline/domain-model.md and business-rules.md, write
-/specs/baseline/stories.md: for each major user-facing capability you
+Using /.ai-dlc/domain-model.md and business-rules.md, write
+/.ai-dlc/stories.md: for each major user-facing capability you
 can identify in the code, write it as a story entry in this format:
 
   ### <Story title>
@@ -115,7 +115,7 @@ This is usually where legacy codebases surface their ugliest surprises — orpha
 
 ```
 Inventory the existing automated tests: what's covered, by module/area,
-and what has no coverage at all. Write /specs/baseline/test-coverage.md:
+and what has no coverage at all. Write /.ai-dlc/test-coverage.md:
 coverage by module, test types present (unit/integration/e2e), and a
 list of high-risk untested areas — cross-reference against
 business-rules.md so rules with no test backing them are called out
@@ -135,7 +135,7 @@ section (its own copy, kept for standalone use without this file present) for th
 Baseline is complete: architecture.md, domain-model.md, business-rules.md,
 constitution.md, stories.md, and test-coverage.md all exist and Steps 6
 and 8 are clean. I'm going to review all of them now. Once I confirm,
-create /specs/baseline/ACCEPTED.md containing just the date and the line
+create /.ai-dlc/ACCEPTED.md containing just the date and the line
 "Baseline accepted as ground truth on <date>." Do not treat the baseline
 as ground truth, and do not begin spec-first feature work, until I've
 given that confirmation and this file exists.
@@ -147,4 +147,4 @@ Don't skip this — it's the one explicit moment a human, not just a clean cross
 
 ## Next — this project becomes greenfield
 
-Once Step 10's `ACCEPTED.md` exists, `/specs/baseline/` is ground truth and the brownfield conversion is complete — for good; there's no reason to run this sequence again. Copy `ai-dlc-workflow/greenfield/CLAUDE.md` over this repo's root `CLAUDE.md` (replacing this brownfield file). From here on the project follows the same standing spec-first workflow a greenfield project uses. Optionally run `business-context-narrowing.md` any time after Step 8 — and before Step 10's sign-off, since it revises `stories.md` — to sharpen and prioritize stories using real business context.
+Once Step 10's `ACCEPTED.md` exists, `/.ai-dlc/` is ground truth and the brownfield conversion is complete — for good; there's no reason to run this sequence again. Copy `ai-dlc-workflow/greenfield/CLAUDE.md` over this repo's root `CLAUDE.md` (replacing this brownfield file). From here on the project follows the same standing spec-first workflow a greenfield project uses. Optionally run `business-context-narrowing.md` any time after Step 8 — and before Step 10's sign-off, since it revises `stories.md` — to sharpen and prioritize stories using real business context.
