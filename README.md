@@ -9,7 +9,22 @@ The code already exists, specs are missing or outdated, and adopting SDD feels a
 
 `ai-dlc-workflow/` has two subfolders — pick the one that matches where the project is today. `brownfield/` is a **one-time** on-ramp: run it once, and the project **becomes** greenfield. `greenfield/` is the standing workflow every project — one that started that way, or one that just finished the brownfield on-ramp — follows for every change from then on.
 
-Both write into `/.ai-dlc/` in the target repo — a hidden, dot-prefixed folder, same pattern as `.claude/`, `.cursor/`, `.kiro/` for AI-tooling directories. Deliberately not `/specs/`: that name collides with the test-spec directory convention many stacks already use (RSpec's `spec/` in Ruby, some Jest/Jasmine setups), and a dot-folder can't collide with anything a project already has.
+Both write into `/.ai-dlc/` in the target repo — a hidden, dot-prefixed folder, same pattern as `.claude/`, `.cursor/`, `.kiro/` for AI-tooling directories. Deliberately not `/specs/`: that name collides with the test-spec directory convention many stacks already use (RSpec's `spec/` in Ruby, some Jest/Jasmine setups), and a dot-folder can't collide with anything a project already has. Shape of `/.ai-dlc/` in a target repo, once both stages have run at least once:
+
+```
+.ai-dlc/
+  architecture.md         — baseline docs: permanent, updated in place as the project evolves
+  domain-model.md
+  business-rules.md
+  constitution.md
+  stories.md              — the ledger: every story's full entry (business + technical detail), old and new
+  test-coverage.md
+  ACCEPTED.md
+  learnings.md            — append-only
+  stories/                — per-change intake files; archival once every story they produced is Done
+    <change-name>.md
+    <bug-name>.md
+```
 
 ```mermaid
 flowchart LR
@@ -22,13 +37,13 @@ flowchart LR
 
 ### `ai-dlc-workflow/brownfield/` — one-time conversion
 
-Use this only if the project already has code and no specs. Copy `brownfield/CLAUDE.md` into the target repo's root as `CLAUDE.md`, then run `brownfield/reverse-engineering-baseline.md` step by step to produce `/.ai-dlc/baseline/` — the six baseline docs listed below (canonical list: `reverse-engineering-baseline.md` Step 10). Optionally run `brownfield/business-context-narrowing.md` to sharpen the reverse-engineered stories with real business context. This ends only when you've reviewed the baseline and signed it off with `/.ai-dlc/baseline/ACCEPTED.md` — at that point the project **is** a greenfield project, permanently, and there's no reason to come back to this folder.
+Use this only if the project already has code and no specs. Copy `brownfield/CLAUDE.md` into the target repo's root as `CLAUDE.md`, then run `brownfield/reverse-engineering-baseline.md` step by step to produce `/.ai-dlc/` — the six baseline docs listed below (canonical list: `reverse-engineering-baseline.md` Step 10). Optionally run `brownfield/business-context-narrowing.md` to sharpen the reverse-engineered stories with real business context. This ends only when you've reviewed the baseline and signed it off with `/.ai-dlc/ACCEPTED.md` — at that point the project **is** a greenfield project, permanently, and there's no reason to come back to this folder.
 
 The six baseline docs: `architecture.md`, `domain-model.md`, `business-rules.md`, `constitution.md`, `stories.md`, and `test-coverage.md`.
 
 ### `ai-dlc-workflow/greenfield/` — the standing workflow
 
-Use this from day one on a genuinely new project, or the moment `brownfield/` above finishes. Copy `greenfield/CLAUDE.md` into the repo's root as `CLAUDE.md` (replacing the brownfield one, if there was one). From here on it governs every enhancement and bug fix: check `/.ai-dlc/learnings.md` and the baseline first, then capture the request in a single intake file (`/.ai-dlc/<change-name>.md`). Claude analyzes it in Plan Mode, scopes it into one story or an ordered list of smaller ones, and drafts each story's full entry — business format plus technical detail (design, tasks) — directly into `/.ai-dlc/baseline/stories.md`, tagged `Status: Not Started | In Progress | Done`. Once approved, stories are implemented one at a time; the intake file becomes archival once every story it produced is `Done`. Bug fixes use a lighter variant with their own intake file. Update the baseline and learnings log after.
+Use this from day one on a genuinely new project, or the moment `brownfield/` above finishes. Copy `greenfield/CLAUDE.md` into the repo's root as `CLAUDE.md` (replacing the brownfield one, if there was one). From here on it governs every enhancement and bug fix: check `/.ai-dlc/learnings.md` and the baseline first, then capture the request in a single intake file (`/.ai-dlc/stories/<change-name>.md`). Claude analyzes it in Plan Mode, scopes it into one story or an ordered list of smaller ones, and drafts each story's full entry — business format plus technical detail (design, tasks) — directly into `/.ai-dlc/stories.md`, tagged `Status: Not Started | In Progress | Done`. Once approved, stories are implemented one at a time; the intake file becomes archival once every story it produced is `Done`. Bug fixes use a lighter variant with their own intake file. Update the baseline and learnings log after.
 
 ## Contents
 
@@ -36,27 +51,27 @@ Use this from day one on a genuinely new project, or the moment `brownfield/` ab
 ai-dlc-workflow/
   brownfield/                              — one-time: run only if the project has no specs yet
     CLAUDE.md                              — copy to target repo root to start
-    reverse-engineering-baseline.md        — the step-by-step sequence; builds /.ai-dlc/baseline/ and signs it off
+    reverse-engineering-baseline.md        — the step-by-step sequence; builds /.ai-dlc/ and signs it off
     business-context-narrowing.md          — optional: sharpen stories with business context
   greenfield/                              — standing workflow for every project, from day one or post-conversion
     CLAUDE.md                              — copy to repo root; governs every future change
   templates/                               — optional intake-file skeletons for greenfield/
-    enhancement-request.md                 — /.ai-dlc/<change-name>.md; Claude drafts the story(ies) from it
-    bug-request.md                         — /.ai-dlc/<bug-name>.md, for the lightweight bug-fix variant
+    enhancement-request.md                 — /.ai-dlc/stories/<change-name>.md; Claude drafts the story(ies) from it
+    bug-request.md                         — /.ai-dlc/stories/<bug-name>.md, for the lightweight bug-fix variant
 ```
 
 - **`ai-dlc-workflow/brownfield/CLAUDE.md`** — Rule 0 (ask before assuming) plus the instruction to run `reverse-engineering-baseline.md`. Nothing about ongoing feature work lives here — that's `greenfield/`'s job, once this is done.
-- **`ai-dlc-workflow/brownfield/reverse-engineering-baseline.md`** — the ordered, copy-pasteable prompt sequence to run once against any existing codebase to produce the six baseline docs (see above — this file's Step 10 is the canonical list) under `/.ai-dlc/baseline/`, ending in an explicit sign-off (`ACCEPTED.md`).
+- **`ai-dlc-workflow/brownfield/reverse-engineering-baseline.md`** — the ordered, copy-pasteable prompt sequence to run once against any existing codebase to produce the six baseline docs (see above — this file's Step 10 is the canonical list) under `/.ai-dlc/`, ending in an explicit sign-off (`ACCEPTED.md`).
 - **`ai-dlc-workflow/brownfield/business-context-narrowing.md`** — optional follow-up to prioritize and clarify the reverse-engineered stories using real product/business context. Skip if not available.
 - **`ai-dlc-workflow/greenfield/CLAUDE.md`** — the rules read at the start of every session: Rule 0, the baseline reference (handles both "author it fresh" for a new project and "go run brownfield/ first" for an unconverted one), the ongoing spec-first workflow, the lightweight bug-fix variant, and the learnings log.
-- **`ai-dlc-workflow/templates/`** — optional starting-point skeletons for the single-file intake docs `greenfield/CLAUDE.md` describes: `enhancement-request.md` (becomes `/.ai-dlc/<change-name>.md`) and `bug-request.md` (becomes `/.ai-dlc/<bug-name>.md`). Claude drafts the resulting story or stories directly into `/.ai-dlc/baseline/stories.md`, not into a separate file. Not required — skip a section that doesn't apply rather than leaving placeholder text in a real spec doc.
+- **`ai-dlc-workflow/templates/`** — optional starting-point skeletons for the single-file intake docs `greenfield/CLAUDE.md` describes: `enhancement-request.md` (becomes `/.ai-dlc/stories/<change-name>.md`) and `bug-request.md` (becomes `/.ai-dlc/stories/<bug-name>.md`). Claude drafts the resulting story or stories directly into `/.ai-dlc/stories.md`, not into a separate file. Not required — skip a section that doesn't apply rather than leaving placeholder text in a real spec doc.
 
 ## How to apply this to a project
 
 **If the project already has code and no specs (brownfield) — one-time:**
 1. Copy `ai-dlc-workflow/brownfield/CLAUDE.md` into the root of the target repo as `CLAUDE.md` (alongside the rest of `brownfield/`, or referenced from wherever your team keeps shared docs).
 2. Open Claude Code in that repo.
-3. Work through `reverse-engineering-baseline.md`, step by step, in order — paste each step's prompt as-is. It ends with your sign-off, creating `/.ai-dlc/baseline/ACCEPTED.md`.
+3. Work through `reverse-engineering-baseline.md`, step by step, in order — paste each step's prompt as-is. It ends with your sign-off, creating `/.ai-dlc/ACCEPTED.md`.
 4. (Optional) Run `business-context-narrowing.md` any time after Step 8 of the baseline sequence, before the final sign-off.
 5. Copy `ai-dlc-workflow/greenfield/CLAUDE.md` over the repo's root `CLAUDE.md`. The project is now greenfield — permanently — and step 4 above never needs to run again.
 

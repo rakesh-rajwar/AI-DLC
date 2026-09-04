@@ -1,9 +1,9 @@
 # Bug report — <bug-name>
 
-Single intake file — copy to `/.ai-dlc/<bug-name>.md`. Claude analyzes it and proposes the fix plan
+Single intake file — copy to `/.ai-dlc/stories/<bug-name>.md`. Claude analyzes it and proposes the fix plan
 (root cause, approach, tasks) directly for approval — see `greenfield/CLAUDE.md`'s bug-fix variant. No
 separate design/tasks files: the plan lives in the approval step, and the durable record afterward is
-`/.ai-dlc/learnings.md` (and `/.ai-dlc/baseline/stories.md`/`business-rules.md` only if this fix corrects
+`/.ai-dlc/learnings.md` (and `/.ai-dlc/stories.md`/`business-rules.md` only if this fix corrects
 something already documented there).
 
 ## Source
@@ -20,7 +20,7 @@ as "none" if this came directly from investigation.]
 [...]
 
 ## Violates
-[The business rule or story this contradicts, if any — reference `/.ai-dlc/baseline/business-rules.md`
+[The business rule or story this contradicts, if any — reference `/.ai-dlc/business-rules.md`
 or `stories.md`. Leave "none identified" if this is genuinely undocumented behavior.]
 
 ## Acceptance criterion for "fixed"

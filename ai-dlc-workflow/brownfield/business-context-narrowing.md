@@ -13,7 +13,7 @@ Here is high-level business context for this product:
 - Current priorities: [what's actively being invested in]
 - Known deprecated areas: [anything being phased out]
 
-Using this context, revisit /.ai-dlc/baseline/stories.md:
+Using this context, revisit /.ai-dlc/stories.md:
 1. Resolve as many [PURPOSE UNCLEAR] tags as this context allows.
 2. Tag each story with a priority (core / supporting / legacy-only)
    based on this context.
