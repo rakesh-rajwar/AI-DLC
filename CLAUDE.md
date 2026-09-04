@@ -29,8 +29,10 @@ Never silently fill a gap with an assumption when you could ask.
 - `business-rules.md`
 - `constitution.md`
 - `stories.md`
+- `test-coverage.md` — coverage map used to decide when a change needs a characterization test first (see spec-first workflow below)
+- `ACCEPTED.md` — presence of this file is the signal the baseline was reviewed and accepted, not just generated
 
-**If `/specs/baseline/` does not exist yet**, do not start feature work. Point me to `playbook/reverse-engineering-baseline.md` in this repo and run that sequence first, step by step, applying Rule 0 throughout.
+**If `/specs/baseline/` does not exist yet, or exists but has no `ACCEPTED.md`**, do not start feature work. Point me to `playbook/reverse-engineering-baseline.md` in this repo and run that sequence first, step by step, applying Rule 0 throughout — it ends with the sign-off that creates `ACCEPTED.md`.
 
 ---
 
@@ -45,7 +47,7 @@ Before starting ANY new work — enhancement or bug fix:
 2. For anything genuinely new or changed (not a lightweight bug fix — see variant below), create `/specs/<change-name>/` and go through, in order:
    - `requirements.md` — what's being asked, acceptance criteria
    - `design.md` — how it fits with the existing architecture and domain model in `/specs/baseline/`
-   - `tasks.md` — ordered, small implementation tasks, each tagged to a requirement
+   - `tasks.md` — ordered, small implementation tasks, each tagged to a requirement. If `/specs/baseline/test-coverage.md` marks the affected area as untested, add a task to write a characterization test capturing current behavior before the task that changes it.
    - implementation — one task (or small task group) at a time; show the diff and wait for approval before continuing
 
 3. After implementation, update `/specs/baseline/` to reflect the change:
@@ -64,7 +66,7 @@ Never skip straight to code. Never treat `/specs/baseline/` as static — it mus
 For bug fixes that do NOT change architecture, domain model, or existing contracts, skip `design.md` — use this shorter sequence instead:
 
 1. `requirements.md` (lightweight) — what's broken, expected vs actual behavior, and the acceptance criterion for "fixed." Reference the business rule or story this violates, if any.
-2. `tasks.md` — usually a single task: root cause + fix + regression test.
+2. `tasks.md` — usually a single task: root cause + fix + regression test. If `/specs/baseline/test-coverage.md` marks the affected code as untested, first write a characterization test capturing today's (buggy) behavior, then the regression test proving the fix — same task.
 3. implementation — fix + test, show diff, wait for approval.
 
 If, while investigating, the fix turns out to require an architecture or domain-model change (i.e. it's bigger than it looked), **stop and say so** — switch to the full `requirements → design → tasks → implementation` flow instead of proceeding on the lightweight path.

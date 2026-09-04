@@ -23,6 +23,8 @@ Based on the structural inventory, write /specs/baseline/architecture.md:
 - data flow through the system for the 2-3 most important use cases
 - tech stack and why each major dependency appears to be there
 - integration points (databases, external APIs, queues, etc.)
+- build/test/deploy pipeline and environments, if any exist (CI config,
+  Dockerfiles, deploy scripts) — describe what runs, when, and where
 
 Describe what exists. Do not suggest improvements or flag it as good/bad.
 Apply Rule 0 if anything here is ambiguous.
@@ -97,8 +99,35 @@ story whose acceptance criteria aren't backed by a rule you found
 
 This is usually where legacy codebases surface their ugliest surprises — orphaned logic nobody uses, or behavior nobody wrote down as intentional.
 
+## Step 9 — Test coverage baseline (the safety net greenfield gets for free)
+
+```
+Inventory the existing automated tests: what's covered, by module/area,
+and what has no coverage at all. Write /specs/baseline/test-coverage.md:
+coverage by module, test types present (unit/integration/e2e), and a
+list of high-risk untested areas — cross-reference against
+business-rules.md so rules with no test backing them are called out
+specifically. Don't write missing tests yet — just map the gap.
+```
+
+A greenfield project starts with no legacy behavior to break, so there's nothing to protect yet. A brownfield one already has real behavior in production — `test-coverage.md` is what lets future spec-first changes touch untested code safely instead of by accident. `CLAUDE.md`'s spec-first workflow references this file when deciding whether a task needs a characterization test before the real change.
+
+## Step 10 — Baseline sign-off (the gate before spec-first mode)
+
+```
+Baseline is complete: architecture.md, domain-model.md, business-rules.md,
+constitution.md, stories.md, and test-coverage.md all exist and Steps 6
+and 8 are clean. I'm going to review all of them now. Once I confirm,
+create /specs/baseline/ACCEPTED.md containing just the date and the line
+"Baseline accepted as ground truth on <date>." Do not treat the baseline
+as ground truth, and do not begin spec-first feature work, until I've
+given that confirmation and this file exists.
+```
+
+Don't skip this — it's the one explicit moment a human, not just a clean cross-check, says "yes, this is right." Everything after this point in `CLAUDE.md`'s spec-first workflow assumes the baseline is trustworthy; this step is where that trust is actually earned rather than assumed.
+
 ---
 
 ## Next
 
-Once Step 8 is clean, `/specs/baseline/` is ready to serve as ground truth. Optionally run `business-context-narrowing.md` next to sharpen and prioritize `stories.md` using real business context. Either way, all future work in this repo now follows the spec-first workflow defined in `CLAUDE.md`.
+Once Step 10's `ACCEPTED.md` exists, `/specs/baseline/` is ground truth and this repo now follows the spec-first workflow defined in `CLAUDE.md`. Optionally run `business-context-narrowing.md` any time after Step 8 — and before Step 10's sign-off, since it revises `stories.md` — to sharpen and prioritize stories using real business context.

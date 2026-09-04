@@ -19,7 +19,7 @@ playbook/
 ```
 
 - **`CLAUDE.md`** — the standing rules Claude Code reads at the start of every session in a project: the forced ask-before-assuming rule (Rule 0), the baseline reference, the ongoing spec-first workflow, the lightweight bug-fix variant, and the learnings log.
-- **`playbook/reverse-engineering-baseline.md`** — the ordered, copy-pasteable prompt sequence to run once against any existing codebase to produce `architecture.md`, `domain-model.md`, `business-rules.md`, `constitution.md`, and `stories.md` under `/specs/baseline/`.
+- **`playbook/reverse-engineering-baseline.md`** — the ordered, copy-pasteable prompt sequence to run once against any existing codebase to produce `architecture.md`, `domain-model.md`, `business-rules.md`, `constitution.md`, `stories.md`, and `test-coverage.md` under `/specs/baseline/`, ending in an explicit sign-off (`ACCEPTED.md`) before spec-first work begins.
 - **`playbook/business-context-narrowing.md`** — optional follow-up to prioritize and clarify the reverse-engineered stories using real product/business context. Skip if not available.
 
 ## How to apply this to a project
