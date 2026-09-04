@@ -38,7 +38,7 @@ Never silently fill a gap with an assumption when you could ask.
 
 Before starting ANY new work — enhancement or bug fix:
 
-0. Check `/specs/learnings.md` first. If a past entry is relevant to this area of the code, say so and factor it in before proceeding.
+0. Check `/specs/learnings.md` first. If a past entry is relevant to this area of the code, say so and factor it in before proceeding. If the file doesn't exist yet, skip this check — it gets created the first time step 4 below runs.
 
 1. Check `/specs/baseline/stories.md` and `business-rules.md` — confirm whether this request is genuinely new, or already exists / is a variation of existing behavior. State which, before proceeding.
 
