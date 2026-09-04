@@ -63,9 +63,9 @@ Before starting ANY new work — enhancement or bug fix:
    - update `architecture.md` or `domain-model.md` if the change affects structure or entities
    - update `test-coverage.md` if the change added or changed tests
 
-5. Append an entry to `/specs/learnings.md` (see below).
+5. Decide whether `/specs/learnings.md` needs an entry (see below) — the `stories.md` entry from step 4 already covers "what changed and why," so only add one if there's something that doesn't: a trade-off, a correction, a surprise. State the decision either way.
 
-**No code change is complete, and none gets committed or pushed, until steps 3-5 above are done.** Verification, baseline docs, and the learnings entry ship together with the code — not after it, not "in a follow-up." Never skip straight to code. Never treat `/specs/baseline/` as static — it must stay in sync with what the code actually does after every change.
+**No code change is complete, and none gets committed or pushed, until steps 3-5 above are done.** Step 5 is "done" once the decision is made and, if warranted, the entry is appended — not skipped by default. Verification and baseline docs ship together with the code — not after it, not "in a follow-up." Never skip straight to code. Never treat `/specs/baseline/` as static — it must stay in sync with what the code actually does after every change.
 
 ---
 
@@ -78,7 +78,7 @@ For bug fixes that do NOT change architecture, domain model, or existing contrac
 3. **plan** — enter Plan Mode with the fix plan built from `tasks.md`, checked against `/specs/baseline/`. If the fix corrects a documented business rule or story, draft the updated `business-rules.md` entry (or `stories.md` acceptance criteria) as part of the plan — what this fix commits to, not a stub — and flag it for review alongside the rest of the plan. Wait for explicit approval before writing any code.
 4. implementation — fix + test, show diff, wait for approval.
 5. Verify — run the full test suite (not just the new regression test) and linters/build before calling the fix done.
-6. Confirm the `business-rules.md`/`stories.md` draft from planning still matches what was actually built; correct it if implementation diverged from the approved plan, then commit it. Update `test-coverage.md` if coverage changed — same change, not a follow-up. Append the learnings entry (below).
+6. Confirm the `business-rules.md`/`stories.md` draft from planning still matches what was actually built; correct it if implementation diverged from the approved plan, then commit it. Update `test-coverage.md` if coverage changed — same change, not a follow-up. Append the learnings entry (below) — mandatory for bug fixes, since a fix rarely gets a `stories.md` entry of its own and the learnings log is usually the only record of the root cause and what was missed.
 
 **No fix is complete, and none gets committed or pushed, until steps 5-6 above are done.**
 
@@ -88,7 +88,19 @@ If, while investigating, the fix turns out to require an architecture or domain-
 
 ## Learnings log
 
-After completing any bug fix or enhancement, append an entry to `/specs/learnings.md`:
+`stories.md` already records what changed and why for a full enhancement — `/specs/learnings.md` is not
+a second place to say the same thing. It's for what a story entry can't hold: bug fixes (which rarely
+get a story of their own), and the "why was this missed" that no acceptance criterion captures.
+
+- **Bug fixes (bug-fix variant)** — always append an entry. This is usually the only durable record of
+  a bug fix: root cause, why it wasn't caught (no test? wrong assumption? undocumented rule?), and a
+  link to the fix.
+- **Enhancements (full flow)** — append an entry only if there's something the `stories.md` entry
+  doesn't already say: a key design trade-off, a baseline doc that needed correcting, a surprising
+  discovery, or a process gap worth flagging. If the story entry covers everything that matters, skip
+  it and say so — don't restate it here for the sake of completing a step.
+
+When an entry is warranted:
 
 - Date, what changed (link to `/specs/<change-name>/` or the bug fix)
 - Root cause (for bug fixes) or key design decision (for enhancements)
