@@ -1,6 +1,6 @@
 # Change request — <change-name>
 
-Single intake file — copy to `/.ai-dlc/stories/<change-name>.md`. This is all you write by hand; Claude analyzes
+Single intake file — copy to `/.ai-dlc/requests/<change-name>.md`. This is all you write by hand; Claude analyzes
 it and drafts the story (or stories) directly into `/.ai-dlc/stories.md` — see
 `greenfield/CLAUDE.md`'s spec-first workflow. This file becomes archival once every story it produced
 reaches `Status: Done` — nothing reads it back after that.
