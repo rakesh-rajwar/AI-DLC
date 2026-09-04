@@ -20,4 +20,4 @@ As a [role], I can [capability], so that [benefit].
 - [Criterion 2]
 - [...]
 
-**Source:** `/specs/<change-name>/`
+**Source:** `/specs/<change-name>/` (archival once `Done` — see `requirements.md` for the Jira story/epic reference, if any)

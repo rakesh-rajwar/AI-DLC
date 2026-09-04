@@ -1,5 +1,10 @@
 # Requirements — <change-name>
 
+## Source
+[Jira story/epic link, if the product team already created one, e.g. PROJ-1234. Optional — leave as
+"none" if this originated directly from conversation or code investigation. This is the durable link
+back to product-side tracking once this folder goes archival — see stories-entry.md.]
+
 ## What's being asked
 [Plain-language description of the enhancement, in your own words — not a copy of the raw request.]
 

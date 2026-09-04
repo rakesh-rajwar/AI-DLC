@@ -1,5 +1,9 @@
 # Requirements (lightweight) — <bug-name>
 
+## Source
+[Jira ticket link, if the product team or support already logged one, e.g. PROJ-1234. Optional — leave
+as "none" if this came directly from investigation.]
+
 ## What's broken
 [...]
 
