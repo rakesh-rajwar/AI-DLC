@@ -5,54 +5,56 @@ Keep all info related to AI DLC
 Converting an undocumented, legacy brownfield software project into a highly disciplined, Spec-Driven Development (SDD) architecture using Claude Code requires a "planning-first" framework.
 The code already exists, specs are missing or outdated, and adopting SDD feels almost impossible. That’s why we need Reverse-Spec.
 
-## Two Phases
+## ai-dlc-workflow/: two starting points, one workflow
 
-This framework brings a project into disciplined, spec-driven AI development in two broad phases, each with its own folder and its own `CLAUDE.md`: a one-time conversion, then a standing workflow for everything after.
+`ai-dlc-workflow/` has two subfolders — pick the one that matches where the project is today. `brownfield/` is a **one-time** on-ramp: run it once, and the project **becomes** greenfield. `greenfield/` is the standing workflow every project — one that started that way, or one that just finished the brownfield on-ramp — follows for every change from then on.
 
 ```mermaid
 flowchart LR
-    A[Brownfield codebase<br/>no specs] --> B[Phase 1<br/>playbook/CLAUDE.md<br/>Reverse-engineer to SDD]
+    A[Brownfield codebase<br/>no specs] --> B[brownfield/CLAUDE.md<br/>Reverse-engineer to SDD]
     B --> C{Human sign-off<br/>ACCEPTED.md}
-    C -->|accepted| D[Phase 2<br/>ai-dlc-workflow/CLAUDE.md<br/>AI DLC Workflow]
+    C -->|"project becomes<br/>greenfield"| D[greenfield/CLAUDE.md<br/>AI DLC Workflow]
+    E[New project,<br/>no code yet] --> D
     D -.->|every future change| D
 ```
 
-### Phase 1 — Brownfield → SDD (one-time, AI-assisted)
+### `ai-dlc-workflow/brownfield/` — one-time conversion
 
-Copy `playbook/CLAUDE.md` into the target repo's root as `CLAUDE.md`, then run `playbook/reverse-engineering-baseline.md` step by step to produce `/specs/baseline/`: `architecture.md`, `domain-model.md`, `business-rules.md`, `constitution.md`, `stories.md`, and `test-coverage.md`. Optionally run `playbook/business-context-narrowing.md` to sharpen the reverse-engineered stories with real business context. Phase 1 ends only when you've reviewed the baseline and it's signed off with `/specs/baseline/ACCEPTED.md` — that file is the gate into Phase 2.
+Use this only if the project already has code and no specs. Copy `brownfield/CLAUDE.md` into the target repo's root as `CLAUDE.md`, then run `brownfield/reverse-engineering-baseline.md` step by step to produce `/specs/baseline/`: `architecture.md`, `domain-model.md`, `business-rules.md`, `constitution.md`, `stories.md`, and `test-coverage.md`. Optionally run `brownfield/business-context-narrowing.md` to sharpen the reverse-engineered stories with real business context. This ends only when you've reviewed the baseline and signed it off with `/specs/baseline/ACCEPTED.md` — at that point the project **is** a greenfield project, permanently, and there's no reason to come back to this folder.
 
-### Phase 2 — AI DLC Workflow (ongoing, every future change)
+### `ai-dlc-workflow/greenfield/` — the standing workflow
 
-Once the baseline is accepted, copy `ai-dlc-workflow/CLAUDE.md` over the repo's root `CLAUDE.md`, replacing the Phase 1 file. From here on it governs every enhancement and bug fix: check `/specs/learnings.md` and the baseline first, then go through `requirements.md → design.md → tasks.md → implementation` (or the lightweight bug-fix variant for small fixes), then update the baseline and learnings log after. This is the same loop a greenfield project would use from day one — Phase 1 is what earns a brownfield project the right to join it.
+Use this from day one on a genuinely new project, or the moment `brownfield/` above finishes. Copy `greenfield/CLAUDE.md` into the repo's root as `CLAUDE.md` (replacing the brownfield one, if there was one). From here on it governs every enhancement and bug fix: check `/specs/learnings.md` and the baseline first, then go through `requirements.md → design.md → tasks.md → implementation` (or the lightweight bug-fix variant for small fixes), then update the baseline and learnings log after.
 
 ## Contents
 
 ```
-playbook/                                  — Phase 1: one-time brownfield -> SDD conversion
-  CLAUDE.md                                — copy to target repo root to start Phase 1
-  reverse-engineering-baseline.md          — the step-by-step sequence; builds /specs/baseline/ and signs it off
-  business-context-narrowing.md            — optional, within Phase 1: sharpen stories with business context
-ai-dlc-workflow/                           — Phase 2: standing workflow for every future change
-  CLAUDE.md                                — copy over the repo's root CLAUDE.md once ACCEPTED.md exists
+ai-dlc-workflow/
+  brownfield/                              — one-time: run only if the project has no specs yet
+    CLAUDE.md                              — copy to target repo root to start
+    reverse-engineering-baseline.md        — the step-by-step sequence; builds /specs/baseline/ and signs it off
+    business-context-narrowing.md          — optional: sharpen stories with business context
+  greenfield/                              — standing workflow for every project, from day one or post-conversion
+    CLAUDE.md                              — copy to repo root; governs every future change
 ```
 
-- **`playbook/CLAUDE.md`** — Phase 1's rules: Rule 0 (ask before assuming) plus the instruction to run `reverse-engineering-baseline.md`. Nothing about ongoing feature work lives here — that's Phase 2's job.
-- **`playbook/reverse-engineering-baseline.md`** — the ordered, copy-pasteable prompt sequence to run once against any existing codebase to produce `architecture.md`, `domain-model.md`, `business-rules.md`, `constitution.md`, `stories.md`, and `test-coverage.md` under `/specs/baseline/`, ending in an explicit sign-off (`ACCEPTED.md`) before Phase 2 begins.
-- **`playbook/business-context-narrowing.md`** — optional Phase 1 follow-up to prioritize and clarify the reverse-engineered stories using real product/business context. Skip if not available.
-- **`ai-dlc-workflow/CLAUDE.md`** — Phase 2's rules, read at the start of every session once Phase 1 is complete: Rule 0, the baseline reference, the ongoing spec-first workflow, the lightweight bug-fix variant, and the learnings log.
+- **`ai-dlc-workflow/brownfield/CLAUDE.md`** — Rule 0 (ask before assuming) plus the instruction to run `reverse-engineering-baseline.md`. Nothing about ongoing feature work lives here — that's `greenfield/`'s job, once this is done.
+- **`ai-dlc-workflow/brownfield/reverse-engineering-baseline.md`** — the ordered, copy-pasteable prompt sequence to run once against any existing codebase to produce `architecture.md`, `domain-model.md`, `business-rules.md`, `constitution.md`, `stories.md`, and `test-coverage.md` under `/specs/baseline/`, ending in an explicit sign-off (`ACCEPTED.md`).
+- **`ai-dlc-workflow/brownfield/business-context-narrowing.md`** — optional follow-up to prioritize and clarify the reverse-engineered stories using real product/business context. Skip if not available.
+- **`ai-dlc-workflow/greenfield/CLAUDE.md`** — the rules read at the start of every session: Rule 0, the baseline reference (handles both "author it fresh" for a new project and "go run brownfield/ first" for an unconverted one), the ongoing spec-first workflow, the lightweight bug-fix variant, and the learnings log.
 
 ## How to apply this to a project
 
-**Phase 1 — one-time conversion:**
-1. Copy `playbook/CLAUDE.md` into the root of the target repo as `CLAUDE.md` (alongside the rest of `playbook/`, or referenced from wherever your team keeps shared docs).
+**If the project already has code and no specs (brownfield) — one-time:**
+1. Copy `ai-dlc-workflow/brownfield/CLAUDE.md` into the root of the target repo as `CLAUDE.md` (alongside the rest of `brownfield/`, or referenced from wherever your team keeps shared docs).
 2. Open Claude Code in that repo.
-3. Work through `playbook/reverse-engineering-baseline.md`, step by step, in order — paste each step's prompt as-is. It ends with your sign-off, creating `/specs/baseline/ACCEPTED.md`.
-4. (Optional) Run `playbook/business-context-narrowing.md` any time after Step 8 of the baseline sequence, before the final sign-off.
+3. Work through `reverse-engineering-baseline.md`, step by step, in order — paste each step's prompt as-is. It ends with your sign-off, creating `/specs/baseline/ACCEPTED.md`.
+4. (Optional) Run `business-context-narrowing.md` any time after Step 8 of the baseline sequence, before the final sign-off.
+5. Copy `ai-dlc-workflow/greenfield/CLAUDE.md` over the repo's root `CLAUDE.md`. The project is now greenfield — permanently — and step 4 above never needs to run again.
 
-**Phase 2 — from here on, every change:**
-5. Copy `ai-dlc-workflow/CLAUDE.md` over the repo's root `CLAUDE.md`, replacing the Phase 1 file.
-6. Every enhancement or bug fix in that repo now automatically follows the spec-first workflow defined there — including checking `/specs/learnings.md` first and updating the baseline after every change.
+**If the project is new, or just finished the steps above:**
+6. `ai-dlc-workflow/greenfield/CLAUDE.md` (already in place) governs every enhancement and bug fix from here on — including checking `/specs/learnings.md` first and updating the baseline after every change.
 
 ## Principle behind Rule 0
 
-The single most important rule in both phases' `CLAUDE.md` is the first one: **ask before assuming, on anything, always.** Every other part of this process — the baseline being trustworthy, the specs staying in sync with code, the learnings log being accurate — depends on Claude asking instead of guessing whenever something is unclear. Teams adopting this playbook should not weaken or remove Rule 0.
+The single most important rule in both `CLAUDE.md` files is the first one: **ask before assuming, on anything, always.** Every other part of this process — the baseline being trustworthy, the specs staying in sync with code, the learnings log being accurate — depends on Claude asking instead of guessing whenever something is unclear. Teams adopting this playbook should not weaken or remove Rule 0.
