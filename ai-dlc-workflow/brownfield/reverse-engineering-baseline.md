@@ -114,6 +114,11 @@ A greenfield project starts with no legacy behavior to break, so there's nothing
 
 ## Step 10 — Baseline sign-off (the gate before spec-first mode)
 
+This is the canonical list of the six baseline docs — `README.md` and the other files in
+`ai-dlc-workflow/` refer back to it rather than repeating it. If you add, rename, or remove a
+baseline doc, update it here first, then check `greenfield/CLAUDE.md`'s "Baseline reference"
+section (its own copy, kept for standalone use without this file present) for the same change.
+
 ```
 Baseline is complete: architecture.md, domain-model.md, business-rules.md,
 constitution.md, stories.md, and test-coverage.md all exist and Steps 6

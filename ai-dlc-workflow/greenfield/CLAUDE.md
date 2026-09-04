@@ -23,7 +23,9 @@ Never silently fill a gap with an assumption when you could ask.
 
 ## Baseline reference
 
-`/specs/baseline/` is ground truth for this project once it exists:
+`/specs/baseline/` is ground truth for this project once it exists. (This list is kept in sync with
+`ai-dlc-workflow/brownfield/reverse-engineering-baseline.md` Step 10, the canonical source — duplicated
+here so this file works standalone in a repo that doesn't have the rest of `ai-dlc-workflow/` around.)
 - `architecture.md`
 - `domain-model.md`
 - `business-rules.md`
@@ -46,7 +48,7 @@ Before starting ANY new work — enhancement or bug fix:
 
 1. Check `/specs/baseline/stories.md` and `business-rules.md` — confirm whether this request is genuinely new, or already exists / is a variation of existing behavior. State which, before proceeding.
 
-2. For anything genuinely new or changed (not a lightweight bug fix — see variant below), create `/specs/<change-name>/` and go through, in order:
+2. For anything genuinely new or changed (not a lightweight bug fix — see variant below), create `/specs/<change-name>/` and go through, in order (optional starting-point skeletons for these live in `ai-dlc-workflow/templates/enhancement/`, if available):
    - `requirements.md` — what's being asked, acceptance criteria
    - `design.md` — how it fits with the existing architecture and domain model in `/specs/baseline/`
    - `tasks.md` — ordered, small implementation tasks, each tagged to a requirement. If `/specs/baseline/test-coverage.md` marks the affected area as untested, add a task to write a characterization test capturing current behavior before the task that changes it.
@@ -69,14 +71,14 @@ Before starting ANY new work — enhancement or bug fix:
 
 ## Bug-fix variant (lightweight path)
 
-For bug fixes that do NOT change architecture, domain model, or existing contracts, skip `design.md` — use this shorter sequence instead:
+For bug fixes that do NOT change architecture, domain model, or existing contracts, skip `design.md` — use this shorter sequence instead (optional starting-point skeletons live in `ai-dlc-workflow/templates/bug-fix/`, if available):
 
 1. `requirements.md` (lightweight) — what's broken, expected vs actual behavior, and the acceptance criterion for "fixed." Reference the business rule or story this violates, if any.
 2. `tasks.md` — usually a single task: root cause + fix + regression test. If `/specs/baseline/test-coverage.md` marks the affected code as untested, first write a characterization test capturing today's (buggy) behavior, then the regression test proving the fix — same task.
-3. **plan** — enter Plan Mode with the fix plan built from `tasks.md`, checked against `/specs/baseline/`. Wait for explicit approval before writing any code.
+3. **plan** — enter Plan Mode with the fix plan built from `tasks.md`, checked against `/specs/baseline/`. If the fix corrects a documented business rule or story, draft the updated `business-rules.md` entry (or `stories.md` acceptance criteria) as part of the plan — what this fix commits to, not a stub — and flag it for review alongside the rest of the plan. Wait for explicit approval before writing any code.
 4. implementation — fix + test, show diff, wait for approval.
 5. Verify — run the full test suite (not just the new regression test) and linters/build before calling the fix done.
-6. Update `/specs/baseline/business-rules.md` or `stories.md` if the fix corrects a documented rule/behavior, and `test-coverage.md` if coverage changed — same change, not a follow-up. Append the learnings entry (below).
+6. Confirm the `business-rules.md`/`stories.md` draft from planning still matches what was actually built; correct it if implementation diverged from the approved plan, then commit it. Update `test-coverage.md` if coverage changed — same change, not a follow-up. Append the learnings entry (below).
 
 **No fix is complete, and none gets committed or pushed, until steps 5-6 above are done.**
 

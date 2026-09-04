@@ -25,7 +25,7 @@ Never silently fill a gap with an assumption when you could ask.
 
 `/specs/baseline/` does not exist yet in this project. Do not start feature work.
 
-Run `reverse-engineering-baseline.md` (from this same `brownfield/` folder) step by step, in order, applying Rule 0 throughout. It produces `architecture.md`, `domain-model.md`, `business-rules.md`, `constitution.md`, `stories.md`, and `test-coverage.md` under `/specs/baseline/`, and ends with an explicit sign-off that creates `/specs/baseline/ACCEPTED.md`.
+Run `reverse-engineering-baseline.md` (from this same `brownfield/` folder) step by step, in order, applying Rule 0 throughout. It produces the six baseline docs under `/specs/baseline/` (see that file's Step 10 for the canonical list) and ends with an explicit sign-off that creates `/specs/baseline/ACCEPTED.md`.
 
 Optionally run `business-context-narrowing.md` (also in this folder) any time after Step 8 of that sequence, before the final sign-off, to sharpen the reverse-engineered stories with real business context.
 
