@@ -75,15 +75,25 @@ Correct anything surfaced here before treating the baseline as ground truth.
 ```
 Using /specs/baseline/domain-model.md and business-rules.md, write
 /specs/baseline/stories.md: for each major user-facing capability you
-can identify in the code, write it as a story in the form:
+can identify in the code, write it as a story entry in this format:
 
-  "As a [role], I can [capability], so that [inferred benefit]"
+  ### <Story title>
 
-followed by the acceptance criteria the code actually enforces today
-(not what it should enforce — what it does), and tagged "Status: Done"
-— it already exists and works, by definition, since it's derived from
-running code. Group by feature area, and cite the file/module each
-story is derived from.
+  As a [role], I can [capability], so that [inferred benefit].
+
+  **Status:** Done
+  **Source:** <file/module this was derived from>
+
+  **Acceptance criteria:**
+  - <criterion the code actually enforces today — not what it should
+    enforce, what it does>
+
+Every entry is "Status: Done" — it already exists and works, by
+definition, since it's derived from running code — so there's no
+technical-details or task section to fill in (those only apply to
+stories drafted for future work, per greenfield/CLAUDE.md). "Source"
+is the file/module citation, standing in for the intake-file link a
+newly planned story would have. Group entries by feature area.
 
 Where the code implies a capability but the "so that" purpose is
 unclear, mark it [PURPOSE UNCLEAR] rather than guessing — or apply Rule
