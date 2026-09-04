@@ -1,6 +1,6 @@
-# CLAUDE.md — Project Rules (AI-Assisted Spec-Driven Development)
+# CLAUDE.md — Phase 2: AI DLC Workflow (Spec-Driven Development)
 
-Copy this file into the root of any project repo. These rules apply to every session, automatically — this is what Claude Code reads before doing anything else.
+Copy this file into the root of the project repo as `CLAUDE.md`, replacing the Phase 1 file (`playbook/CLAUDE.md`), once `/specs/baseline/ACCEPTED.md` exists. From here on, these rules apply to every session, automatically — this is what Claude Code reads before doing anything else.
 
 ---
 
@@ -32,7 +32,7 @@ Never silently fill a gap with an assumption when you could ask.
 - `test-coverage.md` — coverage map used to decide when a change needs a characterization test first (see spec-first workflow below)
 - `ACCEPTED.md` — presence of this file is the signal the baseline was reviewed and accepted, not just generated
 
-**If `/specs/baseline/` does not exist yet, or exists but has no `ACCEPTED.md`**, do not start feature work. Point me to `playbook/reverse-engineering-baseline.md` in this repo and run that sequence first, step by step, applying Rule 0 throughout — it ends with the sign-off that creates `ACCEPTED.md`.
+**If `/specs/baseline/` does not exist yet, or exists but has no `ACCEPTED.md`**, this file shouldn't be in use yet — stop and tell me. Phase 1 isn't complete: go back to `playbook/CLAUDE.md` and run `playbook/reverse-engineering-baseline.md` first, step by step, applying Rule 0 throughout, ending with the sign-off that creates `ACCEPTED.md`.
 
 ---
 

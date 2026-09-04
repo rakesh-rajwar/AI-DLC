@@ -1,6 +1,6 @@
 # Reverse-Engineering a Legacy Codebase into a Spec Baseline
 
-Run once per project, in order, before any spec-first feature work begins. Requires `CLAUDE.md` (from the repo root) to already be in place — Rule 0 in that file governs how Claude should handle ambiguity at every step below.
+Run once per project, in order, before any spec-first feature work begins. Requires `playbook/CLAUDE.md` to already be copied into the target repo's root as `CLAUDE.md` — Rule 0 in that file governs how Claude should handle ambiguity at every step below.
 
 Project-agnostic — no edits needed unless you want to change file paths.
 
@@ -110,7 +110,7 @@ business-rules.md so rules with no test backing them are called out
 specifically. Don't write missing tests yet — just map the gap.
 ```
 
-A greenfield project starts with no legacy behavior to break, so there's nothing to protect yet. A brownfield one already has real behavior in production — `test-coverage.md` is what lets future spec-first changes touch untested code safely instead of by accident. `CLAUDE.md`'s spec-first workflow references this file when deciding whether a task needs a characterization test before the real change.
+A greenfield project starts with no legacy behavior to break, so there's nothing to protect yet. A brownfield one already has real behavior in production — `test-coverage.md` is what lets future spec-first changes touch untested code safely instead of by accident. `ai-dlc-workflow/CLAUDE.md`'s spec-first workflow references this file when deciding whether a task needs a characterization test before the real change.
 
 ## Step 10 — Baseline sign-off (the gate before spec-first mode)
 
@@ -124,10 +124,10 @@ as ground truth, and do not begin spec-first feature work, until I've
 given that confirmation and this file exists.
 ```
 
-Don't skip this — it's the one explicit moment a human, not just a clean cross-check, says "yes, this is right." Everything after this point in `CLAUDE.md`'s spec-first workflow assumes the baseline is trustworthy; this step is where that trust is actually earned rather than assumed.
+Don't skip this — it's the one explicit moment a human, not just a clean cross-check, says "yes, this is right." Everything after this point in `ai-dlc-workflow/CLAUDE.md`'s spec-first workflow assumes the baseline is trustworthy; this step is where that trust is actually earned rather than assumed.
 
 ---
 
 ## Next
 
-Once Step 10's `ACCEPTED.md` exists, `/specs/baseline/` is ground truth and this repo now follows the spec-first workflow defined in `CLAUDE.md`. Optionally run `business-context-narrowing.md` any time after Step 8 — and before Step 10's sign-off, since it revises `stories.md` — to sharpen and prioritize stories using real business context.
+Once Step 10's `ACCEPTED.md` exists, `/specs/baseline/` is ground truth. Copy `ai-dlc-workflow/CLAUDE.md` over this repo's root `CLAUDE.md` (replacing this Phase 1 file) — the repo now follows the spec-first workflow defined there. Optionally run `business-context-narrowing.md` any time after Step 8 — and before Step 10's sign-off, since it revises `stories.md` — to sharpen and prioritize stories using real business context.
