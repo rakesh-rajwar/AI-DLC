@@ -50,13 +50,13 @@ Before starting ANY new work — enhancement or bug fix:
    - `requirements.md` — what's being asked, acceptance criteria
    - `design.md` — how it fits with the existing architecture and domain model in `/specs/baseline/`
    - `tasks.md` — ordered, small implementation tasks, each tagged to a requirement. If `/specs/baseline/test-coverage.md` marks the affected area as untested, add a task to write a characterization test capturing current behavior before the task that changes it.
-   - **plan** — enter Plan Mode and lay out the implementation plan built from `tasks.md`, checked against `/specs/baseline/` (architecture, domain model, business rules, conventions). Do not write any code until I've explicitly approved the plan.
+   - **plan** — enter Plan Mode and lay out the implementation plan built from `tasks.md`, checked against `/specs/baseline/` (architecture, domain model, business rules, conventions). As part of this plan, draft the full new/updated `stories.md` entry in the same format as the rest of the file — "As a [role], I can [capability], so that [benefit]" plus the complete acceptance criteria this change commits to (drawn from `requirements.md`), not a stub. This is what the plan commits to delivering, not a write-up invented after the fact. Do not write any code until I've explicitly approved the plan, story and acceptance criteria included.
    - implementation — one task (or small task group) at a time; show the diff and wait for approval before continuing
 
 3. Once implementation is done, verify it before calling it finished — run the full test suite, linters/build, and manually check the plan's acceptance criteria against what was actually built. Don't rely on a single passing test as proof; use every check the repo has.
 
 4. Update `/specs/baseline/` to reflect the change, in the same change — never as a follow-up:
-   - add/update the relevant story in `stories.md`
+   - confirm the story and acceptance criteria drafted during planning still match what was actually built; correct them if implementation diverged from the approved plan, then commit that full entry to `stories.md`
    - add any new business rule to `business-rules.md`
    - update `architecture.md` or `domain-model.md` if the change affects structure or entities
    - update `test-coverage.md` if the change added or changed tests
