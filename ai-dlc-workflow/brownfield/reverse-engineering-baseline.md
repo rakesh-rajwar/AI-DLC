@@ -75,13 +75,25 @@ Correct anything surfaced here before treating the baseline as ground truth.
 ```
 Using /specs/baseline/domain-model.md and business-rules.md, write
 /specs/baseline/stories.md: for each major user-facing capability you
-can identify in the code, write it as a story in the form:
+can identify in the code, write it as a story entry in this format:
 
-  "As a [role], I can [capability], so that [inferred benefit]"
+  ### <Story title>
 
-followed by the acceptance criteria the code actually enforces today
-(not what it should enforce — what it does). Group by feature area, and
-cite the file/module each story is derived from.
+  As a [role], I can [capability], so that [inferred benefit].
+
+  **Status:** Done
+  **Source:** <file/module this was derived from>
+
+  **Acceptance criteria:**
+  - <criterion the code actually enforces today — not what it should
+    enforce, what it does>
+
+Every entry is "Status: Done" — it already exists and works, by
+definition, since it's derived from running code — so there's no
+technical-details or task section to fill in (those only apply to
+stories drafted for future work, per greenfield/CLAUDE.md). "Source"
+is the file/module citation, standing in for the intake-file link a
+newly planned story would have. Group entries by feature area.
 
 Where the code implies a capability but the "so that" purpose is
 unclear, mark it [PURPOSE UNCLEAR] rather than guessing — or apply Rule
@@ -113,6 +125,11 @@ specifically. Don't write missing tests yet — just map the gap.
 A greenfield project starts with no legacy behavior to break, so there's nothing to protect yet. A brownfield one already has real behavior in production — `test-coverage.md` is what lets future spec-first changes touch untested code safely instead of by accident. `ai-dlc-workflow/greenfield/CLAUDE.md`'s spec-first workflow references this file when deciding whether a task needs a characterization test before the real change.
 
 ## Step 10 — Baseline sign-off (the gate before spec-first mode)
+
+This is the canonical list of the six baseline docs — `README.md` and the other files in
+`ai-dlc-workflow/` refer back to it rather than repeating it. If you add, rename, or remove a
+baseline doc, update it here first, then check `greenfield/CLAUDE.md`'s "Baseline reference"
+section (its own copy, kept for standalone use without this file present) for the same change.
 
 ```
 Baseline is complete: architecture.md, domain-model.md, business-rules.md,
