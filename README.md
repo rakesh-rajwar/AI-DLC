@@ -1,5 +1,5 @@
 # AI-DLC
-Keep all info related to AI DLC
+Move to AI DLC steps
 
 ## Brownfield Projects.
 Converting an undocumented, legacy brownfield software project into a highly disciplined, Spec-Driven Development (SDD) architecture using Claude Code requires a "planning-first" framework.
