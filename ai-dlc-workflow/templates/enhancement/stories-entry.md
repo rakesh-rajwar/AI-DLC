@@ -13,6 +13,8 @@ After implementation and verification, confirm this entry still matches what was
 
 As a [role], I can [capability], so that [benefit].
 
+**Status:** In Progress _(set at plan-time approval; change to Done once implemented, verified, and committed to `/specs/baseline/stories.md` — step 5 of the spec-first workflow)_
+
 **Acceptance criteria:**
 - [Criterion 1 — drawn from requirements.md]
 - [Criterion 2]

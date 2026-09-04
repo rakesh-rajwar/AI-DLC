@@ -80,8 +80,10 @@ can identify in the code, write it as a story in the form:
   "As a [role], I can [capability], so that [inferred benefit]"
 
 followed by the acceptance criteria the code actually enforces today
-(not what it should enforce — what it does). Group by feature area, and
-cite the file/module each story is derived from.
+(not what it should enforce — what it does), and tagged "Status: Done"
+— it already exists and works, by definition, since it's derived from
+running code. Group by feature area, and cite the file/module each
+story is derived from.
 
 Where the code implies a capability but the "so that" purpose is
 unclear, mark it [PURPOSE UNCLEAR] rather than guessing — or apply Rule

@@ -26,7 +26,7 @@ The six baseline docs: `architecture.md`, `domain-model.md`, `business-rules.md`
 
 ### `ai-dlc-workflow/greenfield/` — the standing workflow
 
-Use this from day one on a genuinely new project, or the moment `brownfield/` above finishes. Copy `greenfield/CLAUDE.md` into the repo's root as `CLAUDE.md` (replacing the brownfield one, if there was one). From here on it governs every enhancement and bug fix: check `/specs/learnings.md` and the baseline first, then go through `requirements.md → design.md → tasks.md → implementation` (or the lightweight bug-fix variant for small fixes), then update the baseline and learnings log after.
+Use this from day one on a genuinely new project, or the moment `brownfield/` above finishes. Copy `greenfield/CLAUDE.md` into the repo's root as `CLAUDE.md` (replacing the brownfield one, if there was one). From here on it governs every enhancement and bug fix: check `/specs/learnings.md` and the baseline first, then scope the request — a single story, several smaller stories broken out of a bigger feature and delivered one at a time, or a lightweight bug fix — before going through `requirements.md → design.md → tasks.md → implementation` per story (or the lightweight bug-fix variant for small fixes). Each `stories.md` entry tracks `Status: Not Started | In Progress | Done`. Update the baseline and learnings log after.
 
 ## Contents
 
@@ -39,7 +39,7 @@ ai-dlc-workflow/
   greenfield/                              — standing workflow for every project, from day one or post-conversion
     CLAUDE.md                              — copy to repo root; governs every future change
   templates/                               — optional skeletons for the docs greenfield/ creates per change
-    enhancement/                           — requirements.md, design.md, tasks.md, stories-entry.md
+    enhancement/                           — scope.md, requirements.md, design.md, tasks.md, stories-entry.md
     bug-fix/                               — requirements.md, tasks.md
 ```
 
