@@ -50,16 +50,20 @@ Before starting ANY new work — enhancement or bug fix:
    - `requirements.md` — what's being asked, acceptance criteria
    - `design.md` — how it fits with the existing architecture and domain model in `/specs/baseline/`
    - `tasks.md` — ordered, small implementation tasks, each tagged to a requirement. If `/specs/baseline/test-coverage.md` marks the affected area as untested, add a task to write a characterization test capturing current behavior before the task that changes it.
+   - **plan** — enter Plan Mode and lay out the implementation plan built from `tasks.md`, checked against `/specs/baseline/` (architecture, domain model, business rules, conventions). Do not write any code until I've explicitly approved the plan.
    - implementation — one task (or small task group) at a time; show the diff and wait for approval before continuing
 
-3. After implementation, update `/specs/baseline/` to reflect the change:
+3. Once implementation is done, verify it before calling it finished — run the full test suite, linters/build, and manually check the plan's acceptance criteria against what was actually built. Don't rely on a single passing test as proof; use every check the repo has.
+
+4. Update `/specs/baseline/` to reflect the change, in the same change — never as a follow-up:
    - add/update the relevant story in `stories.md`
    - add any new business rule to `business-rules.md`
    - update `architecture.md` or `domain-model.md` if the change affects structure or entities
+   - update `test-coverage.md` if the change added or changed tests
 
-4. Append an entry to `/specs/learnings.md` (see below).
+5. Append an entry to `/specs/learnings.md` (see below).
 
-Never skip straight to code. Never treat `/specs/baseline/` as static — it must stay in sync with what the code actually does after every change.
+**No code change is complete, and none gets committed or pushed, until steps 3-5 above are done.** Verification, baseline docs, and the learnings entry ship together with the code — not after it, not "in a follow-up." Never skip straight to code. Never treat `/specs/baseline/` as static — it must stay in sync with what the code actually does after every change.
 
 ---
 
@@ -69,7 +73,12 @@ For bug fixes that do NOT change architecture, domain model, or existing contrac
 
 1. `requirements.md` (lightweight) — what's broken, expected vs actual behavior, and the acceptance criterion for "fixed." Reference the business rule or story this violates, if any.
 2. `tasks.md` — usually a single task: root cause + fix + regression test. If `/specs/baseline/test-coverage.md` marks the affected code as untested, first write a characterization test capturing today's (buggy) behavior, then the regression test proving the fix — same task.
-3. implementation — fix + test, show diff, wait for approval.
+3. **plan** — enter Plan Mode with the fix plan built from `tasks.md`, checked against `/specs/baseline/`. Wait for explicit approval before writing any code.
+4. implementation — fix + test, show diff, wait for approval.
+5. Verify — run the full test suite (not just the new regression test) and linters/build before calling the fix done.
+6. Update `/specs/baseline/business-rules.md` or `stories.md` if the fix corrects a documented rule/behavior, and `test-coverage.md` if coverage changed — same change, not a follow-up. Append the learnings entry (below).
+
+**No fix is complete, and none gets committed or pushed, until steps 5-6 above are done.**
 
 If, while investigating, the fix turns out to require an architecture or domain-model change (i.e. it's bigger than it looked), **stop and say so** — switch to the full `requirements → design → tasks → implementation` flow instead of proceeding on the lightweight path.
 
